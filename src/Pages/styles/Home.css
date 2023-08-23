@@ -6,22 +6,26 @@
   height: 100%;
   width: 100%;
 }
-.Home .MainTitle {
+.Home .HomeConianer {
+  padding: 1rem;
+}
+.Home .HomeConianer .MainTitle {
   background-color: blanchedalmond;
   width: 15rem;
+  margin-top: 0.5rem;
   margin-left: auto;
   margin-right: auto;
 }
-.Home div {
+.Home .HomeConianer div {
   text-align: center;
 }
-.Home div div.InputContainer {
+.Home .HomeConianer div div.InputContainer {
   display: flex;
 }
-.Home div div.InputContainer #Input {
+.Home .HomeConianer div div.InputContainer #Input {
   margin: 0rem 0.5rem;
 }
-.Home div div.InputContainer .bi-plus-square-fill {
+.Home .HomeConianer div div.InputContainer .bi-plus-square-fill {
   display: inline-block;
   font-size: 1.5rem;
 }

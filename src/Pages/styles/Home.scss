@@ -1,5 +1,4 @@
 .Home {
-
     .BackGroundImg {
         position: fixed;
         z-index: -1;
@@ -9,32 +8,36 @@
 
     }
 
-    .MainTitle {
-        background-color: blanchedalmond;
-        width: 15rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .HomeConianer {
+        padding: 1rem;
+
+        .MainTitle {
+            background-color: blanchedalmond;
+            width: 15rem;
+            margin-top: 0.5rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
 
-    div {
-        text-align: center;
+        div {
+            text-align: center;
 
-        div.InputContainer {
-            display: flex;
+            div.InputContainer {
+                display: flex;
 
-            #Input {
-                margin: 0rem 0.5rem;
-            }
+                #Input {
+                    margin: 0rem 0.5rem;
+                }
 
-            .bi-plus-square-fill {
-                display: inline-block;
-                font-size: 1.5rem;
+                .bi-plus-square-fill {
+                    display: inline-block;
+                    font-size: 1.5rem;
+                }
             }
         }
     }
 }
-
 
 @media screen and (max-width: 643px) {
 

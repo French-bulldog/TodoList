@@ -96,61 +96,60 @@ const Home = () => {
 
   return (
     <div className="Home">
-
       <img className="BackGroundImg" src="https://picsum.photos/2000/1500/?blur" alt="" />
+      <div className="HomeConianer">
+        <div>
+          <h1 className="MainTitle">Todo List</h1>
+          <div className="">
+            <input id="Input" className="Input" type="text" placeholder="add Todo..."
+              onKeyDown={e => {
+                if (e.key === "Enter") {
+                  HandlerAdd(input);
+                }
+              }}
+              value={input} onChange={(e) => { setInput(e.target.value) }} />
+            <button className="" onClick={() => HandlerAdd(input)} ><i class="bi bi-plus-lg"></i></button>
+          </div>
+        </div>
 
-      <div>
-        <h1 className="MainTitle mb-2">Todo List</h1>
-        <div className="">
-          <input id="Input" className="Input" type="text" placeholder="add Todo..."
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                HandlerAdd(input);
-              }
-            }}
-            value={input} onChange={(e) => { setInput(e.target.value) }} />
-          <button className="" onClick={() => HandlerAdd(input)} ><i class="bi bi-plus-lg"></i></button>
+        {console.log(List)}
+
+        <div className="row m-1">
+          {/* 代辦事項 */}
+          <div className="col-6 standby">
+            <h2 className="MainTitle">代辦事項</h2>
+            {
+              List && Object.keys(List).map((item) => {
+                let EditDisabled = List[item];
+                return (
+                  <div className="m-1 standbyContainer">
+                    <input className="me-2" type="checkbox" id="" name="" checked={false} onChange={() => HandlerCheckBoxOn(item)} />
+                    <input className="w-auto me-1" value={item} disabled={EditDisabled} onChange={(e) => HandlerChangeInp(item, e.target.value)} />
+                    <button className="w-auto me-1" onClick={() => HandlerEdit(item)} ><i class="bi bi-pencil"></i></button>
+                    <button className="w-auto" onClick={() => HandlerClear(item)} ><i class="bi bi-trash"></i></button>
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          {/* 已辦事項 */}
+          <div className="col-6 complete">
+            <h2 className="MainTitle">完成事項</h2>
+            {
+              ComleteList && Object.keys(ComleteList).map((item) => {
+                return (
+                  <div className="m-1">
+                    <input className="me-2" type="checkbox" id="" name="" checked={true} onChange={() => HandlerCheckBoxOff(item)} />
+                    <input className="w-75" value={item} disabled />
+                  </div>
+                )
+              })
+            }
+          </div>
+
         </div>
       </div>
-
-      {console.log(List)}
-
-      <div className="row m-1">
-        {/* 代辦事項 */}
-        <div className="col-6 standby">
-          <h2 className="MainTitle">代辦事項</h2>
-          {
-            List && Object.keys(List).map((item) => {
-              let EditDisabled = List[item];
-              return (
-                <div className="m-1 standbyContainer">
-                  <input className="me-2" type="checkbox" id="" name="" checked={false} onChange={() => HandlerCheckBoxOn(item)} />
-                  <input className="w-auto me-1" value={item} disabled={EditDisabled} onChange={(e) => HandlerChangeInp(item, e.target.value)} />
-                  <button className="w-auto me-1" onClick={() => HandlerEdit(item)} ><i class="bi bi-pencil"></i></button>
-                  <button className="w-auto" onClick={() => HandlerClear(item)} ><i class="bi bi-trash"></i></button>
-                </div>
-              )
-            })
-          }
-        </div>
-
-        {/* 已辦事項 */}
-        <div className="col-6 complete">
-          <h2 className="MainTitle">完成事項</h2>
-          {
-            ComleteList && Object.keys(ComleteList).map((item) => {
-              return (
-                <div className="m-1">
-                  <input className="me-2" type="checkbox" id="" name="" checked={true} onChange={() => HandlerCheckBoxOff(item)} />
-                  <input className="w-75" value={item} disabled />
-                </div>
-              )
-            })
-          }
-        </div>
-
-      </div>
-
     </div >
   );
 }

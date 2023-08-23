@@ -1,0 +1,67 @@
+nav.navbar-expand-lg {
+    /* 固定在頁面頂部 */
+    position: sticky;
+    /* 距離上方0 */
+    top: 0;
+    background-color: black;
+    color: rgb(128, 128, 128);
+    height: auto;
+    width: 100%;
+    padding: 0.5rem;
+    /* 設定z-index確保導覽列在其他元素之上 */
+    z-index: 100;
+    display: flex;
+    align-items: center;
+
+    .Project {
+        color: rgb(128, 128, 128);
+        text-decoration: none;
+        // margin-right: 15rem;
+    }
+
+    ul {
+        margin: 3px 0px 3px 0px;
+        width: 100%;
+        margin-bottom: 0;
+        list-style: none;
+        display: flex;
+        // flex-wrap: wrap;
+
+
+        li.VavRight {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+            li {
+                margin-left: 4px;
+
+                input {
+                    border-radius: 5px;
+                }
+
+                button {
+                    background-color: #5cb85c;
+                    border-radius: 5px;
+                }
+
+            }
+        }
+
+    }
+
+}
+
+
+
+@media screen and (max-width: 994px) {
+    .VavRight {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+    }
+}
