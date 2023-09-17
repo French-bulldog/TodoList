@@ -1,3 +1,30 @@
+.Home .EditContent #myModal {
+  color: red;
+}
+.Home .EditContent #myModal .modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Home .EditContent #myModal .modal-dialog .modal-content .modal-body img {
+  width: 100%;
+  height: 100%;
+}
+.Home .EditContent #myModal .modal-dialog .modal-content .content {
+  margin: 0rem 1rem;
+  border: 1px solid black;
+}
+.Home .EditContent #myModal .modal-dialog .modal-content p {
+  text-align: center;
+}
+.Home .EditContent #myModal .modal-dialog .modal-content button {
+  padding: 1rem;
+  transition: 0.5s;
+}
+.Home .EditContent #myModal .modal-dialog .modal-content button:hover {
+  font-size: 2rem;
+}
 .Home .BackGroundImg {
   position: fixed;
   z-index: -1;
@@ -15,6 +42,46 @@
   margin-top: 0.5rem;
   margin-left: auto;
   margin-right: auto;
+}
+.Home .HomeConianer .Left_Right_Main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.Home .HomeConianer .Left_Right_Main .standby {
+  margin: 1rem 1rem;
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  background-color: white;
+  flex: 1 1 400px;
+  padding: 1rem 0rem;
+}
+.Home .HomeConianer .Left_Right_Main .standby .checkBox {
+  width: 10%;
+}
+.Home .HomeConianer .Left_Right_Main .standby input {
+  color: white;
+  background-color: black;
+  width: 70%;
+  overflow-x: auto;
+}
+.Home .HomeConianer .Left_Right_Main .standby bottom {
+  width: 10%;
+}
+.Home .HomeConianer .Left_Right_Main .complete {
+  flex: 1 1 400px;
+  height: 100%;
+  margin: 1rem 1rem;
+  padding: 1rem 0rem;
+  background-color: white;
+}
+.Home .HomeConianer .Left_Right_Main .complete .checkbox {
+  width: 10%;
+}
+.Home .HomeConianer .Left_Right_Main .complete input {
+  color: white;
+  background-color: black;
+  width: 80%;
 }
 .Home .HomeConianer div {
   text-align: center;

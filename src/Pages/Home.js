@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./styles/Home.css"
 
 const Home = () => {
   const [List, setList] = useState(JSON.parse(localStorage.getItem("List")) || {});  // 裝 Todo 代辦清單
   const [ComleteList, setComleteList] = useState(JSON.parse(localStorage.getItem("ComleteList")) || {});  // 裝 Todo 完成清單
   const [input, setInput] = useState(""); // 裝使用者輸入
+  let inputRef = useRef('');
+  let [PreSelect, setPreSelect] = useState('');
+  let [NextSelect, setNextSelect] = useState('');
 
 
   // 加入內容至清單
@@ -50,17 +53,20 @@ const Home = () => {
 
   // 項目改變值
   const HandlerChangeInp = (item, newKey) => {
-    setList(prevList => {
-      const updatedList = { ...prevList };
+    if (item != newKey) {
+      setList(prevList => {
+        const updatedList = { ...prevList };
 
-      // 新增物件 取代舊物件
-      updatedList[newKey] = updatedList[item];
+        // 新增物件 取代舊物件
+        updatedList[newKey] = updatedList[item];
 
-      // 刪除舊物件
-      delete updatedList[item];
+        // 刪除舊物件
+        delete updatedList[item];
 
-      return updatedList;
-    });
+        return updatedList;
+      });
+    }
+    else alert("尚未修改事項");
   };
 
 
@@ -114,34 +120,54 @@ const Home = () => {
 
         {console.log(List)}
 
-        <div className="row m-1">
+        <div className="Left_Right_Main m-1">
           {/* 代辦事項 */}
-          <div className="col-6 standby">
+          <div className="standby">
             <h2 className="MainTitle">代辦事項</h2>
             {
               List && Object.keys(List).map((item) => {
                 let EditDisabled = List[item];
                 return (
-                  <div className="m-1 standbyContainer">
-                    <input className="me-2" type="checkbox" id="" name="" checked={false} onChange={() => HandlerCheckBoxOn(item)} />
-                    <input className="w-auto me-1" value={item} disabled={EditDisabled} onChange={(e) => HandlerChangeInp(item, e.target.value)} />
-                    <button className="w-auto me-1" onClick={() => HandlerEdit(item)} ><i class="bi bi-pencil"></i></button>
-                    <button className="w-auto" onClick={() => HandlerClear(item)} ><i class="bi bi-trash"></i></button>
+                  <div className="m-1">
+                    <input className="checkBox" type="checkbox" id="" name="" checked={false}
+                      onChange={() => HandlerCheckBoxOn(item)} />
+                    <input className="" value={item} disabled={EditDisabled}
+                      ref={inputRef}
+                      onBlur={() => HandlerChangeInp(inputRef.current.value)} />
+
+
+                    {/* <div type="button" className="" data-bs-toggle="modal" data-bs-target="#myModal">
+                      <svg xmlns="http:www.w3.org/2000/svg" fill="currentColor" className="bi bi-play-btn PreviewButton" viewBox="0 0 16 16">
+                        <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                      </svg>
+                    </div> */}
+
+
+                    <button className="" data-bs-toggle="modal" data-bs-target="#myModal" onClick={() => {
+                      setPreSelect(item);
+                      setNextSelect(item);
+                      // HandlerEdit(item);
+                    }}>
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button className="" onClick={() => HandlerClear(item)} ><i class="bi bi-trash"></i></button>
                   </div>
                 )
               })
             }
           </div>
 
+
           {/* 已辦事項 */}
-          <div className="col-6 complete">
+          <div className="complete">
             <h2 className="MainTitle">完成事項</h2>
             {
               ComleteList && Object.keys(ComleteList).map((item) => {
                 return (
                   <div className="m-1">
-                    <input className="me-2" type="checkbox" id="" name="" checked={true} onChange={() => HandlerCheckBoxOff(item)} />
-                    <input className="w-75" value={item} disabled />
+                    <input className="checkbox" type="checkbox" id="" name="" checked={true} onChange={() => HandlerCheckBoxOff(item)} />
+                    <input className="" value={item} disabled />
                   </div>
                 )
               })
@@ -150,6 +176,32 @@ const Home = () => {
 
         </div>
       </div>
+
+      {/* 修改代辦內容區 */}
+      {/* <div className="EditContent">
+        <h3>修改代辦內容</h3>
+      </div> */}
+
+      {/* 修改代辦內容區 */}
+      <div className='EditContent'>
+        <div className="modal" id="myModal" >
+          <div className="modal-dialog center">
+            <div className="modal-content" >
+              <div className="modal-body" style={{ height: "auto", minWidth: "15rem" }}>
+                {/* <img src="https://t3.ftcdn.net/jpg/05/28/06/40/360_F_528064037_weAP5bkUboFtkQ6DVgiEGndwTQ7XcEZE.jpg" alt="" /> */}
+              </div>
+              <h3 className="text-center">修改代辦事項!</h3>
+              {/* <p>{CurrentSelect}</p> */}
+              <input className="text-center content" value={NextSelect} onChange={(e) => {
+                setNextSelect(e.target.value)
+              }}></input>
+              <button data-bs-dismiss="modal" onClick={() => HandlerChangeInp(PreSelect, NextSelect)}>確定修改</button>
+              <button data-bs-dismiss="modal">取消修改</button>
+            </div>
+          </div>
+        </div>
+      </div >
+
     </div >
   );
 }
